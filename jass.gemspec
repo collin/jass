@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.authors          = ["Collin Miller"]
   s.email            = "collintmiller@gmail.com"
   s.homepage         = "http://github.com/collin/jass"
-  s.files            = %w{README Rakefile.rb lib/jass.rb lib/jsspec lib/jsspec/layout.html.haml lib/jsspec/example.html.jass lib/jass.rb~ rspec/jass rspec/jass/jass_precompiler_spec.rb rspec/jass/jass_engine_spec.rb rspec/jass_spec.rb rspec/spec_helper.rb}
+  s.files            = %w{README Rakefile.rb lib/jass.rb lib/jsspec lib/jsspec/layout.html.haml lib/jsspec/example.html.jass rspec/jass rspec/jass/jass_precompiler_spec.rb rspec/jass/jass_engine_spec.rb rspec/jass_spec.rb rspec/spec_helper.rb}
   
   s.add_dependency  "rake"
   s.add_dependency  "rspec"

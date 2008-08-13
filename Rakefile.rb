@@ -54,7 +54,7 @@ Gem::Specification.new do |s|
   s.version          = "#{@version}"
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.has_rdoc         = false
-  s.summary          = "Toolkit for creating whitespace active mini-languages. Inspired by Haml. Feature light."
+  s.summary          = "A whitespace active min-language for writing javascript specs."
   s.authors          = ["Collin Miller"]
   s.email            = "collintmiller@gmail.com"
   s.homepage         = "http://github.com/collin/jass"
