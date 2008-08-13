@@ -24,6 +24,10 @@ namespace :spec do
   end
 end
 
+task :cleanup do 
+  Dir.glob("**/*.*~")+Dir.glob("**/*~").each{|swap|FileUtils.rm(swap, :force => true)}
+end
+
 namespace :gem do
   task :version do
     @version = "0.0.1"
@@ -35,9 +39,9 @@ namespace :gem do
   end
 
   task :install => :build do
-    cmd = "gem install fold -l"
+    cmd = "gem install jass -l"
     system cmd unless system "sudo #{cmd}"
-    FileUtils.rm(__DIR__ + "fold-#{@version}.gem")
+    FileUtils.rm(__DIR__ + "jass-#{@version}.gem")
   end
 
   task :spec => :version do

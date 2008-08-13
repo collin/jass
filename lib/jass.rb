@@ -1,9 +1,15 @@
+require 'fold'
 require 'haml'
+require 'johnson'
+require 'pathname'
+require 'fileutils'
+
+__DIR__ = Pathname.new(__FILE__).dirname.expand_path
 
 module Jass
   class Precompiler < Fold::Precompiler
     include Johnson::Nodes
-    JsSpecRoot = Lucky7Root + "vendor" + "js_spec"
+    JsSpecRoot =  (__DIR__ + ".." + "vendor" + "jsspec").expand_path
 
     attr_accessor :scripts
   
@@ -11,9 +17,21 @@ module Jass
       super
       
       @scripts = []
-      @scripts << JsSpecRoot + "diff_match_patch.js"
-      @scripts << JsSpecRoot + "JSSpec.js"
-      @scripts << Lucky7Root + "vendor" + "jquery" + "jquery-1.2.6.js"
+      inject_jsspec_scripts
+    end
+
+    def self.write_jsspec_scripts_to path
+      jsspec_scripts.each do |script|
+        FileUtils.cp script, path 
+      end
+    end
+
+    def inject_jsspec_scripts
+      @scripts << *jsspec_scripts
+    end
+
+    def jsspec_scripts
+      [JsSpecRoot + "JSSpec.js", JsSpecRoot + "diff_match_patch.js"]
     end
 
     folds :Line, // do
@@ -44,7 +62,7 @@ module Jass
   end
   
   class Engine < Fold::Engine
-    template = Lucky7Root + "lib" + "jsspec" + "layout.html.haml"
+    template = Pathname.new(__DIR__) + "jsspec" + "layout.html.haml"
     Layout= Haml::Engine.new(template.read)
     
     def render context=nil
